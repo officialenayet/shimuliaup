@@ -114,3 +114,43 @@ body.certificate-page{margin:8px;background:#fff;color:#111;font-family:"Times N
   .certificate-page .cert-photo{width:38px;height:38px}
   .certificate-page .type-warish .cert-field-value{font-weight:700}
 }
+
+/* নাগরিক সনদের মূল পৃষ্ঠার বাংলা অক্ষর, কলাম ও নিচের অনুচ্ছেদের অবস্থান মেলানো। */
+html.certificate-page, body.certificate-page,
+.certificate-page .certificate,
+.certificate-page .cert-title,
+.certificate-page .serial-table,
+.certificate-page .cert-body,
+.certificate-page .cert-body td,
+.certificate-page .cert-address-list,
+.certificate-page .cert-address-list td,
+.certificate-page .cert-meta,
+.certificate-page .cert-statement,
+.certificate-page .cert-closing {
+  font-family: "SolaimanLipi", "Noto Serif Bengali", serif;
+  font-synthesis: weight style;
+}
+.certificate-page .cert-body,
+.certificate-page .cert-address-list,
+.certificate-page .cert-meta {
+  padding-left: 40px;
+}
+.certificate-page .cert-statement,
+.certificate-page .cert-closing {
+  padding-left: 30px;
+}
+.certificate-page .cert-field-value,
+.certificate-page .legacy-address-line {
+  font-weight: 700;
+}
+@media (max-width: 700px) {
+  .certificate-page .cert-body,
+  .certificate-page .cert-address-list,
+  .certificate-page .cert-meta {
+    padding-left: 18px;
+  }
+  .certificate-page .cert-statement,
+  .certificate-page .cert-closing {
+    padding-left: 14px;
+  }
+}
