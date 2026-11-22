@@ -37,7 +37,7 @@ alter table public.certificate_admins enable row level security;
 alter table public.certificates enable row level security;
 grant usage on schema public to anon, authenticated;
 
--- Security-definer helper reads only the private allow-list; no client can edit that table.
+-- নিরাপত্তা-নির্ধারক সহায়কটি শুধু ব্যক্তিগত অনুমোদন-তালিকা পড়ে; কোনো ক্লায়েন্ট ওই টেবিল সম্পাদনা করতে পারে না।
 create or replace function public.is_certificate_admin()
 returns boolean
 language sql
@@ -53,7 +53,7 @@ $$;
 revoke all on function public.is_certificate_admin() from public;
 grant execute on function public.is_certificate_admin() to authenticated;
 
--- Authenticated users must also be explicitly listed in certificate_admins.
+-- লগ-ইন করা ব্যবহারকারীকেও certificate_admins তালিকায় স্পষ্টভাবে যুক্ত থাকতে হবে।
 drop policy if exists "admins can read certificate records" on public.certificates;
 create policy "admins can read certificate records"
   on public.certificates for select to authenticated
@@ -79,8 +79,8 @@ revoke all on table public.certificate_admins from anon, authenticated;
 revoke all on table public.certificates from anon, authenticated;
 grant select, insert, update, delete on table public.certificates to authenticated;
 
--- Public RPC returns only published preview fields. NID is returned only after the
--- admin explicitly enables include_nid on the record. It does not expose a table API.
+-- প্রকাশ্য RPC শুধু প্রকাশিত preview-এর ক্ষেত্রগুলো ফেরত দেয়। NID কেবল তখনই ফেরত আসে, যখন
+-- প্রশাসক রেকর্ডে include_nid স্পষ্টভাবে চালু করেন। এই RPC কোনো টেবিল API উন্মুক্ত করে না।
 create or replace function public.get_public_certificate(p_share_code text)
 returns jsonb
 language sql
@@ -127,8 +127,8 @@ create trigger certificates_touch_updated_at
   before update on public.certificates
   for each row execute function public.touch_updated_at();
 
--- After creating an Auth user in the Supabase Dashboard, replace the email below
--- and run this allow-list statement. Public sign-ups should remain disabled.
+-- Supabase Dashboard-এ Auth ব্যবহারকারী তৈরির পর নিচের ইমেইলটি বদলে
+-- এই অনুমোদন-তালিকার SQL চালান। সাধারণ ব্যবহারকারীর public sign-up বন্ধ রাখুন।
 -- insert into public.certificate_admins (user_id)
 -- select id from auth.users where lower(email) = lower('admin@example.com')
 -- on conflict (user_id) do nothing;

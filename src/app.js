@@ -412,7 +412,7 @@ function renderCertificate(record, publicView) {
   const certificateClass = record.certificate_type === 'warish' ? 'type-warish' : 'type-citizen';
   app.innerHTML = `<div class="public-bar"><div class="brand"><img src="./assets/logo.png" alt=""><div>শিমুলিয়া ইউনিয়ন পরিষদ<small>সনদ প্রিভিউ</small></div></div><div class="top-actions"><button id="return-dashboard" class="btn btn-outline">${publicView ? 'মূল পেজ' : 'ড্যাশবোর্ডে ফিরুন'}</button><button id="print-certificate" class="btn btn-primary">প্রিন্ট / PDF</button></div></div>
     <article class="certificate ${certificateClass}">
-      <header class="cert-header"><img class="cert-logo" src="./assets/logo.png" alt="শিমুলিয়া ইউনিয়ন পরিষদের লোগো"><div class="cert-office"><strong>শিমুলিয়া ইউনিয়ন পরিষদ</strong><br>শিমুলিয়া<br>সাভার, ঢাকা-১৩৪৫<br>ফোন : 01912170415, 01819979797</div><span></span></header>
+      <header class="cert-header"><img class="cert-logo" src="./assets/logo.png" alt="শিমুলিয়া ইউনিয়ন পরিষদের লোগো"><div class="cert-office"><strong>শিমুলিয়া ইউনিয়ন পরিষদ</strong><br>শিমুলিয়া<br>সাভার, ঢাকা-১৩৪৫<br>ফোন : 01912170415, 01819979797</div><img class="cert-photo" src="${record.certificate_type === 'citizen_rafiq' ? './assets/attestation-photo-placeholder.png' : './assets/profile-placeholder.png'}" alt=""></header>
       <div class="cert-title-wrap"><h1 id="cert-title" class="cert-title"></h1></div>
       <table class="serial-table"><tbody><tr id="serial-row"><td id="serial-label" class="serial-label"></td></tr></tbody></table>
       <div id="cert-date-row" class="cert-date-row hidden">তারিখ: <span id="cert-date"></span></div>
@@ -465,8 +465,7 @@ function renderCertificate(record, publicView) {
   document.querySelector('#cert-ward').textContent = `: ${banglaDigits(record.ward || '')}`;
   const nid = record.national_id;
   const nidVisible = Boolean(nid && record.include_nid);
-  document.querySelector('#cert-nid-row').classList.toggle('hidden', !nidVisible);
-  document.querySelector('#cert-nid').textContent = nidVisible ? `: ${banglaDigits(nid)}` : '';
+  document.querySelector('#cert-nid').textContent = nidVisible ? `: ${banglaDigits(nid)}` : ':';
   document.querySelector('#cert-statement').textContent = record.statement || DEFAULT_STATEMENTS[record.certificate_type] || '';
   if (record.certificate_type === 'warish') {
     const table = document.querySelector('#cert-heirs');
