@@ -185,3 +185,17 @@ html.certificate-page, body.certificate-page,
     margin-top: 24px;
   }
 }
+
+/* বামদিকে দৃশ্যমান সরানোর পর টেবিলের প্রস্থийг ঠিক করে горизонтাল scrollbar ঠেকান। */
+.certificate-page .cert-body,
+.certificate-page .cert-address-list,
+.certificate-page .cert-meta {
+  width: calc(100% - 20px);
+}
+@media (max-width: 700px) {
+  .certificate-page .cert-body,
+  .certificate-page .cert-address-list,
+  .certificate-page .cert-meta {
+    width: calc(100% - 8px);
+  }
+}
