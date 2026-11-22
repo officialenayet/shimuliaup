@@ -154,3 +154,34 @@ html.certificate-page, body.certificate-page,
     padding-left: 14px;
   }
 }
+
+/* মূল সাইটের মাপ অনুযায়ী নাগরিক সনদের সারি ও কলামের শেষ সূক্ষ্ম সমন্বয়। */
+.certificate-page .cert-body,
+.certificate-page .cert-address-list,
+.certificate-page .cert-meta {
+  position: relative;
+  left: 20px;
+  padding-left: 0;
+}
+.certificate-page .cert-body tr:not(:first-child) {
+  height: 26px;
+}
+.certificate-page .cert-intro {
+  padding-top: 24px;
+}
+.certificate-page .legacy-address-line {
+  line-height: 33.5px;
+}
+.certificate-page .cert-statement {
+  margin-top: 42px;
+}
+@media (max-width: 700px) {
+  .certificate-page .cert-body,
+  .certificate-page .cert-address-list,
+  .certificate-page .cert-meta {
+    left: 8px;
+  }
+  .certificate-page .cert-statement {
+    margin-top: 24px;
+  }
+}
